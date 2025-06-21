@@ -1,10 +1,9 @@
-//api
+// api
 const API = "https://randomuser.me/api/?results=9";
 
-// loder
+// for leader
 const overlay = document.getElementById("overlay");
 
-// tog loder
 const loaderToggle = (toggle) => {
   if (toggle) {
     overlay.classList.remove("hidden");
@@ -13,8 +12,7 @@ const loaderToggle = (toggle) => {
   }
 };
 
-// promise
-const getDate = (resource) => {
+const getData = (resource) => {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
 
@@ -26,7 +24,7 @@ const getDate = (resource) => {
         resolve(data.results);
         loaderToggle(false);
       } else if (request.request == 4) {
-        reject("Error !!!");
+        reject("error");
         loaderToggle(false);
       }
     });
@@ -35,9 +33,8 @@ const getDate = (resource) => {
   });
 };
 
-// load
 const reload = () => {
-  getDate(API)
+  getData(API)
     .then((data) => {
       updateUI(data);
     })
